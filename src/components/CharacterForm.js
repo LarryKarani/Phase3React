@@ -19,7 +19,7 @@ function CharacterForm({ playerAddingTo, setPlayerAddingTo, users, setUsers }) {
     function handleNewChar(e) {
         e.preventDefault();
         handleClassChange();
-        setPlayerAddingTo({...playerAddingTo, characters: [...existingCharacters, newCharacter]});
+        setPlayerAddingTo({...playerAddingTo, characters: [newCharacter]});
         handleCharacterPost();
     }
 
@@ -56,10 +56,10 @@ function CharacterForm({ playerAddingTo, setPlayerAddingTo, users, setUsers }) {
     function updateUsers(data) {
         const playerIndex = users.findIndex(user => user.id === playerId);
         const newUsers = users
-        newUsers[playerIndex].characters.push(data)
+        newUsers[playerIndex]?.characters.push(data)
         console.log(newUsers)
         setUsers(newUsers)
-        navigate("/")
+        navigate('/my-characters')
     }
 
     function handleCharacterPost() {
@@ -76,61 +76,62 @@ function CharacterForm({ playerAddingTo, setPlayerAddingTo, users, setUsers }) {
 
 
     return (
-        <div>
-            <br></br>
-            <h3>Create a new character</h3>
-            <form onSubmit={handleNewChar}>
-                <h4>Adding to {playerUsername}'s characters</h4>
+        <div className='flex justify-center flex-col mt-3'>
+            <h3 className='text-center'>Create a new character</h3>
+            <h4 className='text-center'>Adding to {playerUsername}'s characters</h4>
+            <form className='flex justify-center flex-col w-1/2 mx-auto' onSubmit={handleNewChar}>
+                
                 <label>Character Name: </label>
                 <input 
+                    className='w-full my-5'
                     required
                     type="text"
                     name="name"
                     value={newCharacter.name}
                     onChange={e => setNewCharacter({...newCharacter, name: e.target.value})}
                 />
-                <br></br>
                 <label>Race (Choose one): </label>
                 <select 
+                    className='w-full my-5'
                     required
                     name="race"
                     value={newCharacter.race}
                     onChange={e => setNewCharacter({...newCharacter, race: e.target.value})}
                 >
                     <option></option>
-                    <option>Dwarf</option>
-                    <option>Dragonborn</option>
-                    <option>Elf</option>
-                    <option>Gnome</option>
-                    <option>Halfling</option>
-                    <option>Human</option>
-                    <option>Tiefling</option>
+                    <option value="Barbarian">Dwarf</option>
+                    <option value="Bard">Dragonborn</option>
+                    <option value="Cleric">Elf</option>
+                    <option value="Druid">Gnome</option>
+                    <option value="Monk">Halfling</option>
+                    <option value="Ranger">Human</option>
+                    <option value="Wizard">Tiefling</option>
                 </select>
-                <br></br>
                 <label>Class (Choose one): </label>
                 <select 
+                    className='w-full my-5'
                     required
                     name="character-class"
                     value={newCharacter.character_class}
                     onChange={e => setNewCharacter({...newCharacter, character_class: e.target.value})}
                 >
                     <option></option>
-                    <option>Barbarian</option>
-                    <option>Bard</option>
-                    <option>Cleric</option>
-                    <option>Druid</option>
-                    <option>Fighter</option>
-                    <option>Monk</option>
-                    <option>Paladin</option>
-                    <option>Ranger</option>
-                    <option>Rogue</option>
-                    <option>Sorcerer</option>
-                    <option>Warlock</option>
-                    <option>Wizard</option>
+                    <option value="Barbarian">Barbarian</option>
+                    <option value="Bard">Bard</option>
+                    <option value="Cleric">Cleric</option>
+                    <option value="Druid">Druid</option>
+                    <option value="Fighter">Fighter</option>
+                    <option value="Monk">Monk</option>
+                    <option value="Paladin">Paladin</option>
+                    <option value="Ranger">Ranger</option>
+                    <option value="Rogue">Rogue</option>
+                    <option value="Sorcerer">Sorcerer</option>
+                    <option value="Warlock">Warlock</option>
+                    <option value="Wizard">Wizard</option>
                 </select>
-                <br></br>
                 <label>Level: </label>
                 <select 
+                    className='w-full my-5'
                     name="level"
                     value={newCharacter.level}
                     onChange={e => setNewCharacter({...newCharacter, level: e.target.value})}
@@ -158,7 +159,7 @@ function CharacterForm({ playerAddingTo, setPlayerAddingTo, users, setUsers }) {
                 </select>
                 <br></br>
                 <br></br>
-                <button type="Submit">Submit New Character</button>
+                <button type="Submit" className='relative flex items-center justify-center rounded-md border border-transparent bg-gray-900 py-2 px-8 text-sm font-medium text-gray-50 hover:bg-gray-400 w-full mt-3'>Submit New Character</button>
             </form>
             <br></br>
             

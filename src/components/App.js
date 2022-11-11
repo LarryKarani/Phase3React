@@ -1,10 +1,10 @@
 import '../App.css';
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import Home from './Home';
+import HomePage from '../pages/HomePage';
+import Home from './Home'
 import CharacterForm from './CharacterForm'
-import Login from './Login';
-import Signup from './Signup';
+
 
 
 function App() {
@@ -64,10 +64,10 @@ function App() {
 
 
   return (
-    <div>
-      <div>
+    <div className='h-screen'>
+      {/* <div>
           { isLoggedIn ? renderLoggedIn() : <><Login login={login} /><Signup login={login} users={users} setUsers={setUsers} /></> }
-      </div>
+      </div> */}
       <Routes>
         <Route 
           path={`/character-creation`} 
@@ -83,7 +83,13 @@ function App() {
         <Route 
           exact path="/" 
           element={ 
-            <Home 
+            <HomePage login={login} users={users} setUsers={setUsers}/> 
+          }
+        />
+        <Route 
+          exact path="/my-characters" 
+          element={ 
+            <Home
               users={users} 
               characters={characters} 
               setCharacters={setCharacters} 

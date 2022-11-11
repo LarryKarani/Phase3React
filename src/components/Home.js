@@ -7,14 +7,14 @@ function Home({ users, characters, setCharacters, setPlayerAddingTo }) {
         const updatedCharacters = characters.filter((char) => char.id !== id);
         setCharacters(updatedCharacters)
     }
-
+    
+    const currentUser = localStorage.getItem('user')
     return (
         <div>
-            <h2>Welcome to the Character Database!</h2>
-            <br></br>
-            <br></br>
             {users.map((user) => {
-                return (
+                console.log(user)
+                if(currentUser === user?.username){
+                    return (
                     <PlayerContainer
                         key={user.id}
                         updateCharacters={updateCharacters}
@@ -22,6 +22,7 @@ function Home({ users, characters, setCharacters, setPlayerAddingTo }) {
                         setPlayerAddingTo={setPlayerAddingTo}
                     />
                 )
+                }
             })}
         </div>
     )
